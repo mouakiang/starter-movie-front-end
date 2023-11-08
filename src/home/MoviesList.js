@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ErrorAlert from "../shared/ErrorAlert";
 import { listMovies } from "../utils/api";
+import noimage from '../assets/nopicture.jpg';
 
 function MoviesList() {
   const [movies, setMovies] = useState([]);
@@ -22,7 +23,12 @@ function MoviesList() {
         className="rounded"
         src={movie.image_url}
         style={{ width: "100%" }}
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = noimage; 
+        }}
       />
+
       <Link
         to={`/movies/${movie.movie_id}`}
         className="stretched-link text-dark"
